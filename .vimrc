@@ -1,3 +1,6 @@
+call pathogen#infect()
+nnoremap ,m :w <BAR> !lessc % > %:t:r.css<CR><space>
+
 " Formatting (some of these are for coding in C and C++)
 set ts=2  " Tabs are 2 spaces
 set bs=2  " Backspace over everything in insert mode
