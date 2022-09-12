@@ -139,6 +139,12 @@ _G.packer_plugins = {
     path = "/home/bryan/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["lspsaga.nvim"] = {
+    config = { "\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.lspsaga\frequire\npcall\0" },
+    loaded = true,
+    path = "/home/bryan/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
+  },
   ["lualine.nvim"] = {
     config = { "\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.lualine\frequire\npcall\0" },
     loaded = true,
@@ -259,10 +265,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\2;\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\22plugins.telescope\frequire\npcall\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\2<\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\23plugins.treesitter\frequire\npcall\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 try_loadstring("\27LJ\2\2:\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\21plugins.nvim-cmp\frequire\npcall\0", "config", "nvim-cmp")
@@ -279,18 +285,22 @@ time([[Config for indent-blankline.nvim]], false)
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\2<\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\23plugins.toggleterm\frequire\npcall\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.luasnip\frequire\npcall\0", "config", "LuaSnip")
-time([[Config for LuaSnip]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\2:\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\21plugins.gitsigns\frequire\npcall\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\2;\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\22plugins.telescope\frequire\npcall\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\0025\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\16plugins.lsp\frequire\npcall\0", "config", "nvim-lspconfig")
 time([[Config for nvim-lspconfig]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.lualine\frequire\npcall\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
+-- Config for: lspsaga.nvim
+time([[Config for lspsaga.nvim]], true)
+try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.lspsaga\frequire\npcall\0", "config", "lspsaga.nvim")
+time([[Config for lspsaga.nvim]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\2<\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\23plugins.bufferline\frequire\npcall\0", "config", "bufferline.nvim")
@@ -299,14 +309,14 @@ time([[Config for bufferline.nvim]], false)
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.comment\frequire\npcall\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.lualine\frequire\npcall\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\2<\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\23plugins.treesitter\frequire\npcall\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\0029\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\20plugins.luasnip\frequire\npcall\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\2:\0\0\3\0\3\0\0056\0\0\0006\1\1\0'\2\2\0B\0\3\1K\0\1\0\21plugins.gitsigns\frequire\npcall\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

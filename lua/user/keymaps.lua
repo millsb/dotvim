@@ -3,6 +3,9 @@ local group = vim.api.nvim_create_augroup('mapping_cmds', {clear = true})
 -- Space as leader key
 vim.g.mapleader = ' '
 
+-- Esc
+vim.keymap.set('i', 'fd', '<Esc>')
+
 -- Shortcuts
 vim.keymap.set({'n', 'x', 'o'}, '<leader>h', '^')
 vim.keymap.set({'n', 'x', 'o'}, '<leader>l', 'g_')

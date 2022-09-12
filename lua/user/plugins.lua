@@ -87,6 +87,15 @@ require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     config = function() pcall(require, 'plugins.lsp') end,
   }
+  use {
+    'glepnir/lspsaga.nvim',
+		branch = 'main',
+    config = function() pcall(require, 'plugins.lspsaga') end,
+  }
+
+	-- Rust
+  use 'simrat39/rust-tools.nvim'
+
 
   -- Autocomplete
   use {

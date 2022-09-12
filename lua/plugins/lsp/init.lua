@@ -10,7 +10,8 @@ require('mason-lspconfig').setup({
     'tsserver',
     'html',
     'cssls',
-    'sumneko_lua'
+    'sumneko_lua',
+		'rust',
   }
 })
 
