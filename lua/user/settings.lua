@@ -1,4 +1,5 @@
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -11,5 +12,5 @@ vim.opt.expandtab = false
 vim.opt.signcolumn = 'yes'
 
 vim.opt.termguicolors = true
-pcall(vim.cmd, 'colorscheme onedark')
+pcall(vim.cmd, 'colorscheme tokyonight')
 

@@ -22,6 +22,8 @@ vim.keymap.set({'n', 'x'}, 'x', '"_x')
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 vim.keymap.set('n', '<leader>bq', '<cmd>bdelete<cr>')
 vim.keymap.set('n', '<leader>bl', '<cmd>buffer #<cr>')
+vim.keymap.set('n', '<leader>sv', '<cmd>source $MYVIMRC<cr>')
+vim.keymap.set('n', '<leader>tf', '<cmd>NvimTreeFindFile<cr>')
 
 vim.api.nvim_create_autocmd('User', {
   pattern = 'LspAttached',

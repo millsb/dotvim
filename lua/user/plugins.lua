@@ -34,6 +34,12 @@ require('packer').startup(function(use)
     config = function() pcall(require, 'plugins.indent-blankline') end,
   }
 
+	-- Editing
+	use { 
+		'andrewferrier/wrapping.nvim',
+		config = function() pcall(require, 'plugins.wrapping') end,
+	}
+
   -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
