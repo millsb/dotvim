@@ -20,6 +20,7 @@ require('packer').startup(function(use)
   use {'joshdick/onedark.vim'}
   use {'tanvirtin/monokai.nvim'}
   use {'lunarvim/darkplus.nvim'}
+	use {'RRethy/nvim-base16'}
   use {'kyazdani42/nvim-web-devicons'}
   use {
     'nvim-lualine/lualine.nvim',
@@ -37,8 +38,11 @@ require('packer').startup(function(use)
 	-- Editing
 	use { 
 		'andrewferrier/wrapping.nvim',
-		config = function() pcall(require, 'plugins.wrapping') end,
+		config = function() pcall(require, 'plugins.wrapping') end
 	}
+
+	-- Swap management
+	use {'gioele/vim-autoswap'}
 
   -- File explorer
   use {
@@ -98,6 +102,12 @@ require('packer').startup(function(use)
 		branch = 'main',
     config = function() pcall(require, 'plugins.lspsaga') end,
   }
+  
+	use { 'jose-elias-alvarez/null-ls.nvim' }
+	use { 
+		'MunifTanjim/eslint.nvim',
+		config = function() pcall(require, 'plugins.eslint') end,
+	}
 
 	-- Rust
   use 'simrat39/rust-tools.nvim'

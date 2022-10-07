@@ -8,6 +8,7 @@ require('mason-lspconfig').setup({
   ensure_installed = {
     'eslint',
     'tsserver',
+		'quick_lint_js',
     'html',
     'cssls',
     'sumneko_lua',
