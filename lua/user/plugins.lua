@@ -97,12 +97,27 @@ require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     config = function() pcall(require, 'plugins.lsp') end,
   }
-  use {
-    'glepnir/lspsaga.nvim',
-		branch = 'main',
-    config = function() pcall(require, 'plugins.lspsaga') end,
-  }
-  
+  -- use {
+  --   'glepnir/lspsaga.nvim',
+		-- branch = 'main',
+  --   config = function() pcallplatform(require, 'plugins.lspsaga') end,
+  -- }
+
+	use({
+			"glepnir/lspsaga.nvim",
+			opt = true,
+			branch = "main",
+			event = "LspAttach",
+			config = function()
+					pcall(require, 'plugins.lspsaga')
+			end,
+			requires = {
+					{"nvim-tree/nvim-web-devicons"},
+					--Please make sure you install markdown and markdown_inline parser
+					{"nvim-treesitter/nvim-treesitter"}
+			}
+	})
+
 	use { 'jose-elias-alvarez/null-ls.nvim' }
 	use { 
 		'MunifTanjim/eslint.nvim',
@@ -129,6 +144,9 @@ require('packer').startup(function(use)
     config = function() pcall(require, 'plugins.luasnip') end,
   }
   use {'rafamadriz/friendly-snippets'}
+
+	-- Copilot
+	use {'github/copilot.vim'}
 
   if install_plugins then
     require('packer').sync()

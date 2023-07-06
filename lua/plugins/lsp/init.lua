@@ -11,8 +11,8 @@ require('mason-lspconfig').setup({
 		'quick_lint_js',
     'html',
     'cssls',
-    'sumneko_lua',
-		'rust',
+		'lua_ls',
+		'pyright',
   }
 })
 
@@ -21,7 +21,7 @@ local lsp_defaults = {
   flags = {
     debounce_text_changes = 150,
   },
-  capabilities = require('cmp_nvim_lsp').update_capabilities(
+  capabilities = require('cmp_nvim_lsp').default_capabilities(
     vim.lsp.protocol.make_client_capabilities()
   ),
   on_attach = function(client, bufnr)
@@ -96,8 +96,8 @@ require('mason-lspconfig').setup_handlers({
       }
     })
   end,
-  ['sumneko_lua'] = function()
-    require('plugins.lsp.sumneko_lua')
+  ['lua_ls'] = function()
+    require('plugins.lsp.lua_ls')
   end
 })
 
