@@ -6,6 +6,9 @@ vim.g.mapleader = ' '
 -- Esc
 vim.keymap.set('i', 'fd', '<Esc>')
 
+-- :W to :w
+vim.keymap.set('n', ':W', ':w')
+
 -- Shortcuts
 vim.keymap.set({'n', 'x', 'o'}, '<leader>h', '^')
 vim.keymap.set({'n', 'x', 'o'}, '<leader>l', 'g_')
