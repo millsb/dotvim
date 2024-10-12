@@ -104,18 +104,11 @@ require('packer').startup(function(use)
   -- }
 
 	use({
-			"glepnir/lspsaga.nvim",
-			opt = true,
-			branch = "main",
-			event = "LspAttach",
+			"nvimdev/lspsaga.nvim",
+			after = "nvim-lspconfig",
 			config = function()
 					pcall(require, 'plugins.lspsaga')
-			end,
-			requires = {
-					{"nvim-tree/nvim-web-devicons"},
-					--Please make sure you install markdown and markdown_inline parser
-					{"nvim-treesitter/nvim-treesitter"}
-			}
+			end
 	})
 
 	use { 'jose-elias-alvarez/null-ls.nvim' }
@@ -124,8 +117,27 @@ require('packer').startup(function(use)
 		config = function() pcall(require, 'plugins.eslint') end,
 	}
 
+	-- Neotest
+	use {
+		"nvim-neotest/neotest",
+    config = function() pcall(require, 'plugins.neotest') end,
+		requires = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter"
+		}
+	}
+
+	use "nvim-neotest/neotest-python"
+
 	-- Rust
   use 'simrat39/rust-tools.nvim'
+
+	-- Clojure / Structural Editing
+	use { 'Olical/conjure' }
+	use { 'guns/vim-sexp' }
+	use { 'tpope/vim-sexp-mappings-for-regular-people' }
 
 
   -- Autocomplete

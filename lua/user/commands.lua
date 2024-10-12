@@ -20,3 +20,4 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'nnoremap <buffer> q <cmd>quit<cr>'
 })
 
+

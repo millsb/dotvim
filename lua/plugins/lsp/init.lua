@@ -7,7 +7,7 @@ require('mason').setup({
 require('mason-lspconfig').setup({
   ensure_installed = {
     'eslint',
-    'tsserver',
+		'ts_ls',
 		'quick_lint_js',
     'html',
     'cssls',
@@ -87,8 +87,8 @@ end
 -- See :help mason-lspconfig-dynamic-server-setup
 require('mason-lspconfig').setup_handlers({
   default_handler,
-  ['tsserver'] = function()
-    lspconfig.tsserver.setup({
+  ['ts_ls'] = function()
+    lspconfig.ts_ls.setup({
       settings = {
         completions = {
           completeFunctionCalls = true

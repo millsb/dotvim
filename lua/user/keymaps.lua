@@ -2,6 +2,7 @@ local group = vim.api.nvim_create_augroup('mapping_cmds', {clear = true})
 
 -- Space as leader key
 vim.g.mapleader = ' '
+vim.g.maplocalleader= ','
 
 -- Esc
 vim.keymap.set('i', 'fd', '<Esc>')
