@@ -123,13 +123,23 @@ require('packer').startup(function(use)
     config = function() pcall(require, 'plugins.neotest') end,
 		requires = {
 			"nvim-neotest/nvim-nio",
+			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter"
+			"nvim-treesitter/nvim-treesitter",
+	    "nvim-neotest/neotest-python",
+	    "nvim-neotest/neotest-jest",
+	    "marilari88/neotest-vitest",
 		}
 	}
 
-	use "nvim-neotest/neotest-python"
+	-- Coverage
+	use {
+		"andythigpen/nvim-coverage",
+		requires = "nvim-lua/plenary.nvim",
+		config = function() pcall(require, 'plugins.nvim-coverage') end,
+	}
+
 
 	-- Rust
   use 'simrat39/rust-tools.nvim'

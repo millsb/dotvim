@@ -195,10 +195,20 @@ _G.packer_plugins = {
     path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/neotest",
     url = "https://github.com/nvim-neotest/neotest"
   },
+  ["neotest-jest"] = {
+    loaded = true,
+    path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/neotest-jest",
+    url = "https://github.com/nvim-neotest/neotest-jest"
+  },
   ["neotest-python"] = {
     loaded = true,
     path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/neotest-python",
     url = "https://github.com/nvim-neotest/neotest-python"
+  },
+  ["neotest-vitest"] = {
+    loaded = true,
+    path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/neotest-vitest",
+    url = "https://github.com/marilari88/neotest-vitest"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -215,6 +225,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-coverage"] = {
+    config = { "\27LJ\2\n?\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\26plugins.nvim-coverage\frequire\npcall\0" },
+    loaded = true,
+    path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/nvim-coverage",
+    url = "https://github.com/andythigpen/nvim-coverage"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/bryan.mills/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-lspconfig"] = {
     after = { "lspsaga.nvim" },
@@ -342,18 +363,46 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\21plugins.gitsigns\frequire\npcall\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: neotest
-time([[Config for neotest]], true)
-try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.neotest\frequire\npcall\0", "config", "neotest")
-time([[Config for neotest]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\n5\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\16plugins.lsp\frequire\npcall\0", "config", "nvim-lspconfig")
 time([[Config for nvim-lspconfig]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nB\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\29plugins.indent-blankline\frequire\npcall\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\21plugins.gitsigns\frequire\npcall\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+try_loadstring("\27LJ\2\n<\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\23plugins.bufferline\frequire\npcall\0", "config", "bufferline.nvim")
+time([[Config for bufferline.nvim]], false)
+-- Config for: nvim-coverage
+time([[Config for nvim-coverage]], true)
+try_loadstring("\27LJ\2\n?\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\26plugins.nvim-coverage\frequire\npcall\0", "config", "nvim-coverage")
+time([[Config for nvim-coverage]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.luasnip\frequire\npcall\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
+-- Config for: eslint.nvim
+time([[Config for eslint.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\19plugins.eslint\frequire\npcall\0", "config", "eslint.nvim")
+time([[Config for eslint.nvim]], false)
+-- Config for: wrapping.nvim
+time([[Config for wrapping.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\21plugins.wrapping\frequire\npcall\0", "config", "wrapping.nvim")
+time([[Config for wrapping.nvim]], false)
+-- Config for: neotest
+time([[Config for neotest]], true)
+try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.neotest\frequire\npcall\0", "config", "neotest")
+time([[Config for neotest]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+try_loadstring("\27LJ\2\n;\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\22plugins.nvim-tree\frequire\npcall\0", "config", "nvim-tree.lua")
+time([[Config for nvim-tree.lua]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\23plugins.toggleterm\frequire\npcall\0", "config", "toggleterm.nvim")
@@ -362,46 +411,22 @@ time([[Config for toggleterm.nvim]], false)
 time([[Config for lualine.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.lualine\frequire\npcall\0", "config", "lualine.nvim")
 time([[Config for lualine.nvim]], false)
--- Config for: wrapping.nvim
-time([[Config for wrapping.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\21plugins.wrapping\frequire\npcall\0", "config", "wrapping.nvim")
-time([[Config for wrapping.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\n;\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\22plugins.nvim-tree\frequire\npcall\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-try_loadstring("\27LJ\2\nB\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\29plugins.indent-blankline\frequire\npcall\0", "config", "indent-blankline.nvim")
-time([[Config for indent-blankline.nvim]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.luasnip\frequire\npcall\0", "config", "LuaSnip")
-time([[Config for LuaSnip]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.comment\frequire\npcall\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-try_loadstring("\27LJ\2\n<\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\23plugins.bufferline\frequire\npcall\0", "config", "bufferline.nvim")
-time([[Config for bufferline.nvim]], false)
--- Config for: eslint.nvim
-time([[Config for eslint.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\19plugins.eslint\frequire\npcall\0", "config", "eslint.nvim")
-time([[Config for eslint.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n<\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\23plugins.treesitter\frequire\npcall\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 try_loadstring("\27LJ\2\n:\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\21plugins.nvim-cmp\frequire\npcall\0", "config", "nvim-cmp")
 time([[Config for nvim-cmp]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n<\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\23plugins.treesitter\frequire\npcall\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\22plugins.telescope\frequire\npcall\0", "config", "telescope.nvim")
 time([[Config for telescope.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\4\0\3\0\0056\0\0\0006\2\1\0'\3\2\0B\0\3\1K\0\1\0\20plugins.comment\frequire\npcall\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd lspsaga.nvim ]]
