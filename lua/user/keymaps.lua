@@ -58,3 +58,8 @@ vim.api.nvim_create_autocmd('User', {
   end
 })
 
+-- Use Option + Enter to accept GitHub Copilot suggestions
+-- C-CR did not work
+vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { expr=true, noremap = true, silent = true })
+vim.g.copilot_no_tab_map = true
+

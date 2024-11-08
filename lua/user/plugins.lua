@@ -36,7 +36,7 @@ require('packer').startup(function(use)
   }
 
 	-- Editing
-	use { 
+	use {
 		'andrewferrier/wrapping.nvim',
 		config = function() pcall(require, 'plugins.wrapping') end
 	}
@@ -111,11 +111,18 @@ require('packer').startup(function(use)
 			end
 	})
 
-	use { 'jose-elias-alvarez/null-ls.nvim' }
-	use { 
+	use { 'jose-elias-alvarez/null-ls.nvim',
+				 config = function() pcall(require, 'plugins.null-ls') end,
+			 }
+
+	use {
 		'MunifTanjim/eslint.nvim',
 		config = function() pcall(require, 'plugins.eslint') end,
 	}
+	-- Prettier
+	use { 'MunifTanjim/prettier.nvim',
+				config = function() pcall(require, 'plugins.prettier') end,
+			}
 
 	-- Neotest
 	use {
@@ -169,6 +176,20 @@ require('packer').startup(function(use)
 
 	-- Copilot
 	use {'github/copilot.vim'}
+	use {
+		'CopilotC-Nvim/CopilotChat.nvim',
+		requires = 'nvim-lua/plenary.nvim',
+		config = function() pcall(require, 'plugins.copilot-chat') end,
+	}
+
+	-- Neorg
+	use {
+		'nvim-neorg/neorg',
+		rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "pathlib.nvim" },
+		tag = "*",
+		config = function() pcall(require, 'plugins.neorg') end,
+	}
+
 
   if install_plugins then
     require('packer').sync()
