@@ -1,134 +1,142 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local install_plugins = false
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  print('Installing packer...')
-  local packer_url = 'https://github.com/wbthomason/packer.nvim'
-  vim.fn.system({'git', 'clone', '--depth', '1', packer_url, install_path})
-  print('Done.')
-
-  vim.cmd('packadd packer.nvim')
-  install_plugins = true
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').startup(function(use)
-  -- Plugin manager
-  use {'wbthomason/packer.nvim'}
-
+require('lazy').setup({
   -- Theming
-  use {'folke/tokyonight.nvim'}
-  use {'joshdick/onedark.vim'}
-  use {'tanvirtin/monokai.nvim'}
-  use {'lunarvim/darkplus.nvim'}
-	use {'RRethy/nvim-base16'}
-  use {'kyazdani42/nvim-web-devicons'}
-  use {
+  {'folke/tokyonight.nvim'},
+  {'joshdick/onedark.vim'},
+  {'tanvirtin/monokai.nvim'},
+  {'lunarvim/darkplus.nvim'},
+	{'RRethy/nvim-base16'},
+  {'kyazdani42/nvim-web-devicons'},
+  {
     'nvim-lualine/lualine.nvim',
     config = function() pcall(require, 'plugins.lualine') end,
-  }
-  use {
+  },
+  { 
     'akinsho/bufferline.nvim',
     config = function() pcall(require, 'plugins.bufferline') end,
-  }
-  use {
+  },
+  {
     'lukas-reineke/indent-blankline.nvim',
     config = function() pcall(require, 'plugins.indent-blankline') end,
-  }
+  },
 
 	-- Editing
-	use {
+	{
 		'andrewferrier/wrapping.nvim',
 		config = function() pcall(require, 'plugins.wrapping') end
-	}
+	},
+
+	-- Command completion
+	{
+		'gelguy/wilder.nvim',
+		config = function() pcall(require, 'plugins.wilder') end,
+	},
 
 	-- Swap management
-	use {'gioele/vim-autoswap'}
+	{'gioele/vim-autoswap'},
 
   -- File explorer
-  use {
+  {
     'kyazdani42/nvim-tree.lua',
     config = function() pcall(require, 'plugins.nvim-tree') end,
-  }
+  },
 
   -- Fuzzy finder
-  use {
+  {
     'nvim-telescope/telescope.nvim',
     config = function() pcall(require, 'plugins.telescope') end,
-  }
-  use {
+  },
+  {
     'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make',
-  }
+    build = 'make',
+  },
 
   -- Git
-  use {
+  {
     'lewis6991/gitsigns.nvim',
     config = function() pcall(require, 'plugins.gitsigns') end,
-  }
-  use {'tpope/vim-fugitive'}
+  },
+  {'tpope/vim-fugitive'},
 
   -- Code manipulation
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     config = function() pcall(require, 'plugins.treesitter') end,
-  }
-  use {'nvim-treesitter/nvim-treesitter-textobjects'}
-  use {
+  },
+  {'nvim-treesitter/nvim-treesitter-textobjects'},
+  {
     'numToStr/Comment.nvim',
     config = function() pcall(require, 'plugins.comment') end,
-  }
-  use {'tpope/vim-surround'}
-  use {'wellle/targets.vim'}
-  use {'tpope/vim-repeat'}
+  },
+  {'tpope/vim-surround'},
+  {'wellle/targets.vim'},
+  {'tpope/vim-repeat'},
 
   -- Utilities
-  use {'moll/vim-bbye'}
-  use {'nvim-lua/plenary.nvim'}
-  use {'editorconfig/editorconfig-vim'}
-  use {
+  {'moll/vim-bbye'},
+  {'nvim-lua/plenary.nvim'},
+  {'editorconfig/editorconfig-vim'},
+  {
     'akinsho/toggleterm.nvim',
     config = function() pcall(require, 'plugins.toggleterm') end,
-  }
+  },
 
   -- LSP support
-  use {'williamboman/mason.nvim'}
-  use {'williamboman/mason-lspconfig.nvim'}
-  use {
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+  {
     'neovim/nvim-lspconfig',
+		dependencies = {
+			'nvimdev/lspsaga.nvim',
+		},
     config = function() pcall(require, 'plugins.lsp') end,
-  }
+  },
   -- use {
   --   'glepnir/lspsaga.nvim',
 		-- branch = 'main',
   --   config = function() pcallplatform(require, 'plugins.lspsaga') end,
   -- }
-
-	use({
+	{
 			"nvimdev/lspsaga.nvim",
-			after = "nvim-lspconfig",
 			config = function()
 					pcall(require, 'plugins.lspsaga')
 			end
-	})
+	},
 
-	use { 'jose-elias-alvarez/null-ls.nvim',
-				 config = function() pcall(require, 'plugins.null-ls') end,
-			 }
+	{ 'jose-elias-alvarez/null-ls.nvim',
+		 config = function() pcall(require, 'plugins.null-ls') end,
+	},
 
-	use {
+	{
 		'MunifTanjim/eslint.nvim',
 		config = function() pcall(require, 'plugins.eslint') end,
-	}
+	},
 	-- Prettier
-	use { 'MunifTanjim/prettier.nvim',
+	{ 'MunifTanjim/prettier.nvim',
 				config = function() pcall(require, 'plugins.prettier') end,
-			}
+			},
 
 	-- Neotest
-	use {
+	{
 		"nvim-neotest/neotest",
     config = function() pcall(require, 'plugins.neotest') end,
-		requires = {
+		depedencies = {
 			"nvim-neotest/nvim-nio",
 			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
@@ -138,70 +146,54 @@ require('packer').startup(function(use)
 	    "nvim-neotest/neotest-jest",
 	    "marilari88/neotest-vitest",
 		}
-	}
+	},
 
 	-- Coverage
-	use {
+	{
 		"andythigpen/nvim-coverage",
-		requires = "nvim-lua/plenary.nvim",
+		depedencies = "nvim-lua/plenary.nvim",
 		config = function() pcall(require, 'plugins.nvim-coverage') end,
-	}
+	},
 
 
 	-- Rust
-  use 'simrat39/rust-tools.nvim'
+  'simrat39/rust-tools.nvim',
 
 	-- Clojure / Structural Editing
-	use { 'Olical/conjure' }
-	use { 'guns/vim-sexp' }
-	use { 'tpope/vim-sexp-mappings-for-regular-people' }
+	{ 'Olical/conjure' },
+	{ 'guns/vim-sexp' },
+	{ 'tpope/vim-sexp-mappings-for-regular-people' },
 
 
   -- Autocomplete
-  use {
+  {
     'hrsh7th/nvim-cmp',
     config = function() pcall(require, 'plugins.nvim-cmp') end,
-  }
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/cmp-path'}
-  use {'saadparwaiz1/cmp_luasnip'}
-  use {'hrsh7th/cmp-nvim-lsp'}
+  },
+  {'hrsh7th/cmp-buffer'},
+  {'hrsh7th/cmp-path'},
+  {'saadparwaiz1/cmp_luasnip'},
+  {'hrsh7th/cmp-nvim-lsp'},
 
   -- Snippets
-  use {
+  {
     'L3MON4D3/LuaSnip',
     config = function() pcall(require, 'plugins.luasnip') end,
-  }
-  use {'rafamadriz/friendly-snippets'}
+  },
+  {'rafamadriz/friendly-snippets'},
 
 	-- Copilot
-	use {'github/copilot.vim'}
-	use {
+	{'github/copilot.vim'},
+	{
 		'CopilotC-Nvim/CopilotChat.nvim',
-		requires = 'nvim-lua/plenary.nvim',
+		depedencies = 'nvim-lua/plenary.nvim',
 		config = function() pcall(require, 'plugins.copilot-chat') end,
-	}
+	},
 
 	-- Neorg
-	use {
+	{
 		'nvim-neorg/neorg',
-		rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "pathlib.nvim" },
-		tag = "*",
-		config = function() pcall(require, 'plugins.neorg') end,
-	}
-
-
-  if install_plugins then
-    require('packer').sync()
-  end
-end)
-
-if install_plugins then
-  print '=================================='
-  print '    Plugins will be installed.'
-  print '    After you press Enter'
-  print '    Wait until Packer completes,'
-  print '       then restart nvim'
-  print '=================================='
-end
-
+		version = "*",
+		config = true
+	},
+})
