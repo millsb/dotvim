@@ -10,27 +10,39 @@ vim.keymap.set('n', '<leader>[n', ':lua require("neotest").jump.next({ status = 
 vim.diagnostic.config({
 	virtual_text = true,
 	float = nil
-
 }, vim.api.nvim_create_namespace('neotest'))
 
 require("neotest").setup({
   adapters = {
     require("neotest-python")({ dap = { justMyCode = true }, pytest_discover_instances = true  }),
+		require("neotest-vitest")({
+			vitestCommand = "npx vitest --coverage run",
+			vitestConfigFile = "vitest.config.ts",
+			-- Filter directories when searching for test files. Useful in large projects (see Filter directories notes).
+			filter_dir = function(name, rel_path, root)
+				return name ~= "node_modules" and name ~= "dist"
+			end,
+			env = { CI = true },
+			cwd = function(path)
+				return vim.fn.getcwd()
+			end,
+		}),
 		require('neotest-jest')({
-          jestCommand = "npm test --coverage --",
-          jestConfigFile = "custom.jest.config.ts",
-          env = { CI = true },
-          cwd = function(path)
-            return vim.fn.getcwd()
-          end,
-        }),
-    -- require("neotest-plenary"),
-    -- require("neotest-vim-test")({
-    --   ignore_file_types = { "python", "vim", "lua" },
-    -- }),
+			jestCommand = "npm test --coverage --",
+			jestConfigFile = "custom.jest.config.ts",
+			env = { CI = true },
+			-- Filter directories when searching for test files. Useful in large projects (see Filter directories notes).
+			filter_dir = function(name, rel_path, root)
+				return name ~= "node_modules" and name ~= "dist"
+			end,
+			cwd = function(path)
+				return vim.fn.getcwd()
+			end,
+		}),
   },
 	diagnostic = {
 		enabled = true,
 		severity = 1,
 	}
 })
+

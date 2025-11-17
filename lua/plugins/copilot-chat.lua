@@ -1,80 +1,44 @@
-local utils = require('config.utils')
-utils.desc('<leader>a', 'AI')
+local chat = require("CopilotChat")
+local select = require("CopilotChat.select")
 
--- Copilot autosuggestions
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_hide_during_completion = 0
-vim.g.copilot_proxy_strict_ssl = 0
-vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
+chat.setup(opts)
+-- Setup the CMP integration
+require("CopilotChat.integrations.cmp").setup()
 
-local chat = require('CopilotChat')
-local actions = require('CopilotChat.actions')
-local integration = require('CopilotChat.integrations.fzflua')
+vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+	chat.ask(args.args, { selection = select.visual })
+end, { nargs = "*", range = true })
 
-local function pick(pick_actions)
-    return function()
-        integration.pick(pick_actions(), {
-            fzf_tmux_opts = {
-                ['-d'] = '45%',
-            },
-        })
-    end
-end
+-- Inline chat with Copilot
+vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+	chat.ask(args.args, {
+		selection = select.visual,
+		window = {
+			layout = "float",
+			relative = "cursor",
+			width = 1,
+			height = 0.4,
+			row = 1,
+		},
+	})
+end, { nargs = "*", range = true })
 
-chat.setup({
-    debug = false,
-    model = 'claude-3.5-sonnet',
-    question_header = '',
-    answer_header = '',
-    error_header = '',
-    allow_insecure = true,
-    mappings = {
-        reset = {
-            normal = '',
-            insert = '',
-        },
-    },
-    prompts = {
-        Explain = {
-            mapping = '<leader>ae',
-            description = 'AI Explain',
-        },
-        Review = {
-            mapping = '<leader>ar',
-            description = 'AI Review',
-        },
-        Tests = {
-            mapping = '<leader>at',
-            description = 'AI Tests',
-        },
-        Fix = {
-            mapping = '<leader>af',
-            description = 'AI Fix',
-        },
-        Optimize = {
-            mapping = '<leader>ao',
-            description = 'AI Optimize',
-        },
-        Docs = {
-            mapping = '<leader>ad',
-            description = 'AI Documentation',
-        },
-        CommitStaged = {
-            mapping = '<leader>ac',
-            description = 'AI Generate Commit',
-        },
-    },
+-- Restore CopilotChatBuffer
+vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
+	chat.ask(args.args, { selection = select.buffer })
+end, { nargs = "*", range = true })
+
+-- Custom buffer for CopilotChat
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "copilot-*",
+	callback = function()
+		vim.opt_local.relativenumber = true
+		vim.opt_local.number = true
+
+		-- Get current filetype and set it to markdown if the current filetype is copilot-chat
+		local ft = vim.bo.filetype
+		if ft == "copilot-chat" then
+			vim.bo.filetype = "markdown"
+		end
+	end,
 })
-
-utils.au('BufEnter', {
-    pattern = 'copilot-*',
-    callback = function()
-        vim.opt_local.relativenumber = false
-        vim.opt_local.number = false
-    end,
-})
-
-vim.keymap.set({ 'n', 'v' }, '<leader>aa', chat.toggle, { desc = 'AI Toggle' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ah', pick(actions.help_actions), { desc = 'AI Help Actions' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ap', pick(actions.prompt_actions), { desc = 'AI Prompt Actions' })

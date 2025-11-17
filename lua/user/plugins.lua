@@ -119,7 +119,7 @@ require('lazy').setup({
 			end
 	},
 
-	{ 'jose-elias-alvarez/null-ls.nvim',
+	{ 'nvimtools/none-ls.nvim',
 		 config = function() pcall(require, 'plugins.null-ls') end,
 	},
 
@@ -135,8 +135,9 @@ require('lazy').setup({
 	-- Neotest
 	{
 		"nvim-neotest/neotest",
-    config = function() pcall(require, 'plugins.neotest') end,
-		depedencies = {
+    -- config = function() pcall(require, 'plugins.neotest') end,
+		config = function() require('plugins.neotest') end,
+		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
@@ -151,7 +152,7 @@ require('lazy').setup({
 	-- Coverage
 	{
 		"andythigpen/nvim-coverage",
-		depedencies = "nvim-lua/plenary.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 		config = function() pcall(require, 'plugins.nvim-coverage') end,
 	},
 
@@ -161,10 +162,13 @@ require('lazy').setup({
 
 	-- Clojure / Structural Editing
 	{ 'Olical/conjure' },
-	{ 'guns/vim-sexp' },
-	{ 'tpope/vim-sexp-mappings-for-regular-people' },
-
-
+	-- { 'guns/vim-sexp' },
+	-- { 'tpope/vim-sexp-mappings-for-regular-people' },
+	{
+		"dundalek/parpar.nvim",
+		dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
+		opts = { }
+	},
   -- Autocomplete
   {
     'hrsh7th/nvim-cmp',
@@ -182,13 +186,15 @@ require('lazy').setup({
   },
   {'rafamadriz/friendly-snippets'},
 
-	-- Copilot
-	{'github/copilot.vim'},
-	{
-		'CopilotC-Nvim/CopilotChat.nvim',
-		depedencies = 'nvim-lua/plenary.nvim',
-		config = function() pcall(require, 'plugins.copilot-chat') end,
-	},
+	-- -- Copilot
+	-- {'github/copilot.vim'},
+	-- {
+	-- 	'CopilotC-Nvim/CopilotChat.nvim',
+	-- 	dependencies = 'nvim-lua/plenary.nvim',
+	-- 	-- config = function() pcall(require, 'plugins.copilot-chat') end,
+	-- 	config = function() require('plugins.copilot-chat') end,
+	-- },
+	--
 
 	-- Neorg
 	{
