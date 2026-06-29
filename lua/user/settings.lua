@@ -13,5 +13,7 @@ vim.opt.expandtab = false
 vim.opt.signcolumn = 'yes'
 
 vim.opt.termguicolors = true
-pcall(vim.cmd, 'colorscheme base16-tomorrow-night')
+vim.opt.foldlevel = 99
 
+-- Rebind it from K to <prefix>gk
+vim.g["conjure#mapping#doc_word"] = "gk"

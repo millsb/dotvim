@@ -22,6 +22,14 @@ require('lazy').setup({
   {'tanvirtin/monokai.nvim'},
   {'lunarvim/darkplus.nvim'},
 	{'RRethy/nvim-base16'},
+	{'rebelot/kanagawa.nvim',
+		config = function()
+			require("kanagawa").setup({
+				theme = "wave"
+			})
+			vim.cmd([[colorscheme kanagawa]])
+		end
+  },
   {'kyazdani42/nvim-web-devicons'},
   {
     'nvim-lualine/lualine.nvim',
@@ -158,26 +166,101 @@ require('lazy').setup({
 
 
 	-- Rust
-  'simrat39/rust-tools.nvim',
+	{
+    "mrcjkb/rustaceanvim",
+    version = "^5",
+    ft = { "rust" },
+    config = function()
+      -- Global configuration for rustaceanvim
+      vim.g.rustaceanvim = {
+        server = {
+          -- This tells rustaceanvim to set up nvim-lspconfig for you
+          -- so you don't need to do it manually.
+          on_attach = function(client, buffer)
+            -- Keymaps can be loaded here
+          end,
+        },
+      }
+    end,
+    -- Ensure mason is installed and configured for rust-analyzer
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
 
 	-- Clojure / Structural Editing
 	{ 'Olical/conjure' },
 	-- { 'guns/vim-sexp' },
 	-- { 'tpope/vim-sexp-mappings-for-regular-people' },
-	{
-		"dundalek/parpar.nvim",
-		dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
-		opts = { }
-	},
+	-- {
+	-- 	"dundalek/parpar.nvim",
+	-- 	dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
+	-- 	opts = { }
+	-- },
+  {"eraserhd/parinfer-rust", build = "cargo build --release"},
+
   -- Autocomplete
-  {
-    'hrsh7th/nvim-cmp',
-    config = function() pcall(require, 'plugins.nvim-cmp') end,
-  },
-  {'hrsh7th/cmp-buffer'},
-  {'hrsh7th/cmp-path'},
-  {'saadparwaiz1/cmp_luasnip'},
-  {'hrsh7th/cmp-nvim-lsp'},
+	{ 'saghen/blink.cmp',
+		-- optional: provides snippets for the snippet source
+		dependencies = { 'rafamadriz/friendly-snippets' },
+
+		-- use a release tag to download pre-built binaries
+		version = '1.*',
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = { preset = 'default' },
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = 'mono'
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = false } },
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { 'lsp', 'path', 'snippets', 'buffer' },
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" }
+		},
+		opts_extend = { "sources.default" }
+	},
+  -- {
+  --   'hrsh7th/nvim-cmp',
+  --   config = function() pcall(require, 'plugins.nvim-cmp') end,
+  -- },
+  -- {'hrsh7th/cmp-buffer'},
+  -- {'hrsh7th/cmp-path'},
+  -- {'saadparwaiz1/cmp_luasnip'},
+  -- {'hrsh7th/cmp-nvim-lsp'},
 
   -- Snippets
   {
@@ -185,6 +268,25 @@ require('lazy').setup({
     config = function() pcall(require, 'plugins.luasnip') end,
   },
   {'rafamadriz/friendly-snippets'},
+	{
+	  "zk-org/zk-nvim",
+		config = function() pcall(require, 'plugins.zk') end,
+	},
+  {
+    "preservim/vim-markdown",
+    ft = "markdown", -- Load the plugin only for markdown files
+    dependencies = { "godlygeek/tabular" }, -- Tabular must be loaded before vim-markdown
+    config = function()
+      -- Optional: Add any specific configuration here
+      -- For example, to disable default folding (it's on by default)
+      -- vim.g.vim_markdown_folding = 0
+
+      -- See the vim-markdown documentation for all available options
+    end,
+  },
+	{
+		'dhruvasagar/vim-table-mode'
+	},
 
 	-- -- Copilot
 	-- {'github/copilot.vim'},
@@ -194,12 +296,60 @@ require('lazy').setup({
 	-- 	-- config = function() pcall(require, 'plugins.copilot-chat') end,
 	-- 	config = function() require('plugins.copilot-chat') end,
 	-- },
-	--
+	
 
+	-- Org Roam
+		{
+		"chipsenkbeil/org-roam.nvim",
+		tag = "0.2.0",
+		dependencies = {
+			{
+				"nvim-orgmode/orgmode",
+				tag = "0.7.0",
+			},
+		},
+		config = function()
+			require("org-roam").setup({
+				directory = "~/org/roam",
+				-- optional 
+				-- paths to additional org files
+				org_files = {}
+			})
+		end
+	},
+	-- Ranger integration
+	{
+		"kelly-lin/ranger.nvim",
+		config = function()
+			require("ranger-nvim").setup({ replace_netrw = true })
+			vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+				noremap = true,
+				callback = function()
+					require("ranger-nvim").open(true)
+				end,
+			})
+		end,
+	},
 	-- Neorg
 	{
 		'nvim-neorg/neorg',
 		version = "*",
 		config = true
 	},
+	-- HTTP Client
+	{
+		"mistweaverco/kulala.nvim",
+		keys = {
+			{ "<leader>Rs", desc = "Send request" },
+			{ "<leader>Ra", desc = "Send all requests" },
+			{ "<leader>Rb", desc = "Open scratchpad" },
+		},
+		ft = {"http", "rest"},
+		opts = {
+			global_keymaps = true,
+			global_keymaps_prefix = "<leader>R",
+			kulala_keymaps_prefix = "",
+		},
+	},
+
 })

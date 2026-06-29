@@ -26,6 +26,7 @@ require('nvim-treesitter.configs').setup({
 		'python',
 		'clojure',
 		'norg',
+		'http',
   },
 })
 
